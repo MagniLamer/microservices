@@ -1,8 +1,9 @@
 package my.course.project.customer.service;
 
+import my.course.project.clients.fraud.FraudClient;
+import my.course.project.clients.fraud.model.FraudCheckResponse;
 import my.course.project.customer.model.Customer;
 import my.course.project.customer.model.CustomerRegistrationRequest;
-import my.course.project.customer.model.FraudCheckResponse;
 import my.course.project.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -10,7 +11,8 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public record CustomerService (
     CustomerRepository customerRepository,
-    RestTemplate restTemplate
+    RestTemplate restTemplate,
+    FraudClient fraudClient
 ){
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
@@ -21,11 +23,7 @@ public record CustomerService (
 
         customerRepository.saveAndFlush(customer);
 
-        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject(
-            "http://FRAUD/api/v1/fraud-check/{customerId}",
-            FraudCheckResponse.class,
-            customer.getId()
-        );
+        FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customer.getId());
 
         if (fraudCheckResponse.isFraudster()){
             throw new IllegalStateException("Fraudster");

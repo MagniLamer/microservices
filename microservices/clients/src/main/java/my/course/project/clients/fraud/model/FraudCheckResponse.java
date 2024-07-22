@@ -1,4 +1,4 @@
-package my.course.project.customer.model;
+package my.course.project.clients.fraud.model;
 
 public record FraudCheckResponse(Boolean isFraudster) {
 }

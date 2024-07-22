@@ -1,7 +1,7 @@
 package my.course.project.fraud.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import my.course.project.fraud.model.FraudCheckResponse;
+import my.course.project.clients.fraud.model.FraudCheckResponse;
 import my.course.project.fraud.service.FraudCheckService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
