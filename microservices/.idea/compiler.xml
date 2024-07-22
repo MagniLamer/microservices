@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="fraud" />
         <module name="customer" />
+        <module name="eurika-server" />
       </profile>
     </annotationProcessing>
   </component>
