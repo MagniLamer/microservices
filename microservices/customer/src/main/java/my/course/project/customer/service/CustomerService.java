@@ -1,5 +1,6 @@
 package my.course.project.customer.service;
 
+import my.course.project.amqp.configuration.RabbitmqMessageProducer;
 import my.course.project.clients.fraud.FraudClient;
 import my.course.project.clients.fraud.model.FraudCheckResponse;
 import my.course.project.clients.notification.NotificationClient;
@@ -8,14 +9,13 @@ import my.course.project.customer.model.Customer;
 import my.course.project.customer.model.CustomerRegistrationRequest;
 import my.course.project.customer.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 @Component
-public record CustomerService (
+public record CustomerService(
     CustomerRepository customerRepository,
     FraudClient fraudClient,
-    NotificationClient notificationClient
-){
+       RabbitmqMessageProducer rabbitmqMessageProducer
+) {
     public void registerCustomer(CustomerRegistrationRequest request) {
         Customer customer = Customer.builder()
             .firstName(request.firstName())
@@ -27,15 +27,18 @@ public record CustomerService (
 
         FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customer.getId());
 
-        if (fraudCheckResponse.isFraudster()){
+        if (fraudCheckResponse.isFraudster()) {
             throw new IllegalStateException("Fraudster");
         }
 
-        notificationClient.sendNotification(
-            new NotificationRequest(customer.getId(),
-                customer.getEmail(),
-                String.format("Hi %s, welcome", customer.getFirstName()))
-        );
+        NotificationRequest notificationRequest = new NotificationRequest(customer.getId(),
+            customer.getEmail(),
+            String.format("Hi %s, welcome", customer.getFirstName()));
+        rabbitmqMessageProducer.publish(
+            notificationRequest,
+            "internal.exchange",
+            "internal.notification.routing-key"
+            );
 
     }
 }
