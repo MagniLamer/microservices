@@ -11,6 +11,7 @@
         <module name="eurika-server" />
         <module name="clients" />
         <module name="fraud" />
+        <module name="amqp" />
         <module name="customer" />
       </profile>
     </annotationProcessing>
