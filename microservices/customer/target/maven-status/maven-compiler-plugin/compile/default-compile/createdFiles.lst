@@ -1,0 +1,8 @@
+my\course\project\customer\configuration\CustomerConfiguration.class
+my\course\project\customer\model\Customer.class
+my\course\project\customer\repository\CustomerRepository.class
+my\course\project\customer\service\CustomerService.class
+my\course\project\customer\controller\CustomerController.class
+my\course\project\customer\CustomerApplication.class
+my\course\project\customer\model\CustomerRegistrationRequest.class
+my\course\project\customer\model\Customer$CustomerBuilder.class
