@@ -1,0 +1,6 @@
+my\course\project\fraud\FraudApplication.class
+my\course\project\fraud\model\FraudCheckHistory.class
+my\course\project\fraud\service\FraudCheckService.class
+my\course\project\fraud\model\FraudCheckHistory$FraudCheckHistoryBuilder.class
+my\course\project\fraud\repository\FraudCheckHistoryRepository.class
+my\course\project\fraud\controller\FraudController.class
