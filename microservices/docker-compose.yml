@@ -33,7 +33,7 @@ services:
     image: openzipkin/zipkin
     container_name: zipkin
     ports:
-      - 9411:9411
+      - "9411:9411"
     networks:
       - spring
 
@@ -43,6 +43,8 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    networks:
+      - spring
 
   eureka-server:
     image: magnilamer/eurika-server:latest
@@ -94,6 +96,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - spring
+      - postgres
     depends_on:
       - zipkin
       - eureka-server
@@ -109,11 +112,13 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - spring
+      - postgres
     depends_on:
       - zipkin
       - eureka-server
       - rabbitmq
       - postgres
+
 networks:
   postgres:
     driver: bridge

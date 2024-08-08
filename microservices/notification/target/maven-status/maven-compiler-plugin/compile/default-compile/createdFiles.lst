@@ -1,8 +1,0 @@
-my\course\project\notification\NotificationApplication.class
-my\course\project\notification\controler\NotificationController.class
-my\course\project\notification\configuration\NotificationConfiguration.class
-my\course\project\notification\rabbitmq\NotificationConsumer.class
-my\course\project\notification\model\Notification$NotificationBuilder.class
-my\course\project\notification\model\Notification.class
-my\course\project\notification\repository\NotificationRepository.class
-my\course\project\notification\service\NotificationService.class
