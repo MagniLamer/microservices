@@ -1,0 +1,4 @@
+my\course\project\clients\notification\model\NotificationRequest.class
+my\course\project\clients\fraud\FraudClient.class
+my\course\project\clients\notification\NotificationClient.class
+my\course\project\clients\fraud\model\FraudCheckResponse.class
